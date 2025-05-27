@@ -17,6 +17,10 @@ class Cell:
         self.__x2 = x2
         self.__y1 = y1
         self.__y2 = y2
+
+        if self.__win is None:
+            return
+        
         if self.has_left_wall:
             line = Line(Point(x1, y1), Point(x1, y2))
             self.__win.draw_line(line)
@@ -40,4 +44,7 @@ class Cell:
         if undo:
             fill_color = "gray"
 
+        if self.__win is None:
+            return
+        
         self.__win.draw_line(Line(Point(mx1, my1), Point(mx2, my2)), fill_color)
