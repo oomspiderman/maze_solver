@@ -60,10 +60,3 @@ class Cell:
             return
         
         self.__win.draw_line(Line(Point(mx1, my1), Point(mx2, my2)), fill_color)
-
-    # FOR DEBUG ONLY
-    def fill(self, color: str):
-        if self.__win is None:
-            return
-        self.__win.draw_rectangle(self.__x1, self.__y1, self.__x2, self.__y2, color)
-

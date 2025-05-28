@@ -74,46 +74,28 @@ class Maze:
         self.__cells[-1][-1].has_bottom_wall = False
         self.__draw_cell(self.__num_cols - 1, self.__num_rows - 1)
 
-    # FOR DEBUG ONLY
-    def __fill_cell(self, i, j, color: str):
-        if 0 <= i < self.__num_cols and 0 <= j < self.__num_rows:
-            self.__cells[i][j].fill(color)
-            self.__animate()
-
     def __break_walls_r(self, i, j):
         self.__cells[i][j].visited = True
         while True:
             next_index_list = []
-            print(f"Location: [{i}][{j}]")             # FOR DEBUG ONLY
-            self.__fill_cell(i, j, "blue")             # FOR DEBUG ONLY
 
             # determine which cell(s) to visit next
             # left
-            if i > 0 and not self.__cells[i - 1][j].visited:
+            if i > 0 and not self.__cells[i - 1][j].visited:   # creates a list of tuples
                 next_index_list.append((i - 1, j))
-                print("Going LEFT")                    # FOR DEBUG ONLY
-                self.__fill_cell(i, j, "lightblue")    # FOR DEBUG ONLY
             # right
             if i < self.__num_cols - 1 and not self.__cells[i + 1][j].visited:
-                next_index_list.append((i + 1, j))
-                print("Going RIGHT")                    # FOR DEBUG ONLY
-                self.__fill_cell(i, j, "lightblue")    # FOR DEBUG ONLY                
+                next_index_list.append((i + 1, j))               
             # up
             if j > 0 and not self.__cells[i][j - 1].visited:
                 next_index_list.append((i, j - 1))
-                print("Going UP")                      # FOR DEBUG ONLY
-                self.__fill_cell(i, j, "lightblue")    # FOR DEBUG ONLY  
             # down
             if j < self.__num_rows - 1 and not self.__cells[i][j + 1].visited:
                 next_index_list.append((i, j + 1))
-                print("Going DOWN")                    # FOR DEBUG ONLY
-                self.__fill_cell(i, j, "lightblue")    # FOR DEBUG ONLY  
 
             # if there is nowhere to go from here
             # just break out
             if len(next_index_list) == 0:
-                print("BREAK OUT!!")                   # FOR DEBUG ONLY
-                self.__fill_cell(i, j, "red")          # FOR DEBUG ONLY  
                 self.__draw_cell(i, j)
                 return
 
@@ -125,23 +107,19 @@ class Maze:
             # right
             if next_index[0] == i + 1:
                 self.__cells[i][j].has_right_wall = False
-                self.__cells[i + 1][j].has_left_wall = False
-                self.__fill_cell(i, j, "green")                    # FOR DEBUG ONLY                  
+                self.__cells[i + 1][j].has_left_wall = False               
             # left
             if next_index[0] == i - 1:
                 self.__cells[i][j].has_left_wall = False
-                self.__cells[i - 1][j].has_right_wall = False
-                self.__fill_cell(i, j, "green")                    # FOR DEBUG ONLY                            
+                self.__cells[i - 1][j].has_right_wall = False                         
             # down
             if next_index[1] == j + 1:
                 self.__cells[i][j].has_bottom_wall = False
-                self.__cells[i][j + 1].has_top_wall = False
-                self.__fill_cell(i, j, "green")                    # FOR DEBUG ONLY                            
+                self.__cells[i][j + 1].has_top_wall = False                         
             # up
             if next_index[1] == j - 1:
                 self.__cells[i][j].has_top_wall = False
-                self.__cells[i][j - 1].has_bottom_wall = False
-                self.__fill_cell(i, j, "green")                    # FOR DEBUG ONLY                            
+                self.__cells[i][j - 1].has_bottom_wall = False                         
 
             # recursively visit the next cell
             self.__break_walls_r(next_index[0], next_index[1])

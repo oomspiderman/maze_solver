@@ -22,10 +22,6 @@ class Window:
     def draw_line(self, line, fill_color="black"):
         line.draw(self.__canvas, fill_color)
 
-    # FOR DEBUG ONLY
-    def draw_rectangle(self, x1, y1, x2, y2, fill_color):
-        self.__canvas.create_rectangle(x1, y1, x2, y2, fill=fill_color, outline="")
-
     def close(self):
         self.__running = False
 
