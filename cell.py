@@ -6,12 +6,13 @@ class Cell:
         self.has_right_wall = True
         self.has_top_wall = True
         self.has_bottom_wall = True
+        self.visited = False
         self.__x1 = -1
         self.__x2 = -1
         self.__y1 = -1
         self.__y2 = -1
         self.__win = win
-
+   
     def draw(self, x1, y1, x2, y2):
         self.__x1 = x1
         self.__x2 = x2
@@ -59,3 +60,10 @@ class Cell:
             return
         
         self.__win.draw_line(Line(Point(mx1, my1), Point(mx2, my2)), fill_color)
+
+    # FOR DEBUG ONLY
+    def fill(self, color: str):
+        if self.__win is None:
+            return
+        self.__win.draw_rectangle(self.__x1, self.__y1, self.__x2, self.__y2, color)
+
